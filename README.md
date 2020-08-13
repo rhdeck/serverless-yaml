@@ -1,50 +1,95 @@
 
 <a name="readmemd"></a>
 
-Template for making easy-to-work-with tempates
+# serverless-yaml
 
-# ts-template
+Utility for extending serverless yml based on common components from dependencies.
 
 ## Usage
 
-1. [Copy this template](https://github.com/rhdeck/ts-template/)
-2. Clone to a local directory (eg `git clone https://github.com/me/my-repository/ && cd my-repository`)
-3. Run `./setup.js` to initialize the node package (Get rid of template strings - and this readme!)
-4. Happy Coding!
+Create files that are useful in a "serverless" subdirectory in a dependency or in the top level package with names that point to the path within the serverless object you want to update, like:
 
-## Useful Scripts
+- `provider.environment.yml` - a map of environment variables to be added to provider.envrionment for common usage
+- `Resources.mainRole.Properties.Policies.yml` - a list of policies to add to the the roles called mainRole.
 
-1. `yarn build` will build using typescript pre-configured to node-compatible defaults
-2. `yarn docs` will auto-generate a README.md that starts with TOP.md, then adds CLI documentation (via [commanderdoc](https://npmjs.com/package/commanderdoc)) for any tool you have set up, and then library documentation after that.
-3. `yarn test` is pre-configured to test for typescript errors
-
-## Git code protections
-
-1. `git commit` will be blocked on the `main` branch unless you set the environment variable `ALLOWMAIN=1` Branch commits and PRs are thus encouraged
-2. `git commit` also tests messages for meeting the commitline standard conventions.
-3. `git commit` blocks pushes that do not pass `yarn test` (as a base case, they must pass typescript compilation)
-4. `npm publish` will always rebuild the code, the documentation, and push those changes back to the repository.
-5. `npm publish` will only publish the lib and src directories - any others are no
-
-## A note on "main"
-
-I made a deliberate choice to change the primary branch from `master` to `main` for reasons that are obvious to some. This repository endeavors to make that just automatic.
-
-PRs and feedback welcome via GitHub issues.
-
-
-<a name="_librarymd"></a>
-
-[template - v1.0.0](#readmemd)
-
-# template - v1.0.0
-
-
+Supports yaml encoding (detected by `.yml` or `.yaml` extension) and JSON (`.json`)
 
 
 <a name="__climd"></a>
 
 # Usage
 ```bash
-template [options]
+npx serverless-yaml [options]
 ```
+Update serverless yml based on partials in depedencies
+# Options
+* -y --yaml-file \<`path`> Serverless yml file to inspect (default: `./serverless.yml`)
+* -o --output \<`path`> Output file (default is same as input serverless file) 
+* -w --working-path \<`path`> Working path for node project (default: `.`)
+
+<a name="_librarymd"></a>
+
+
+# serverless-yaml - v1.0.0
+
+## Index
+
+### Functions
+
+* [apply](#apply)
+* [getAllDependencies](#getalldependencies)
+* [inspectDependency](#inspectdependency)
+
+## Functions
+
+###  apply
+
+▸ **apply**(`source`: object, `key`: string, `objOrArray`: object | any[]): *undefined | object*
+
+*Defined in [index.ts:39](https://github.com/rhdeck/serverless-yaml/blob/52b6291/src/index.ts#L39)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`source` | object |
+`key` | string |
+`objOrArray` | object &#124; any[] |
+
+**Returns:** *undefined | object*
+
+___
+
+###  getAllDependencies
+
+▸ **getAllDependencies**(`path`: string): *[string, string][]*
+
+*Defined in [index.ts:5](https://github.com/rhdeck/serverless-yaml/blob/52b6291/src/index.ts#L5)*
+
+**Parameters:**
+
+Name | Type | Default |
+------ | ------ | ------ |
+`path` | string | process.cwd() |
+
+**Returns:** *[string, string][]*
+
+___
+
+###  inspectDependency
+
+▸ **inspectDependency**(`path`: string): *object*
+
+*Defined in [index.ts:15](https://github.com/rhdeck/serverless-yaml/blob/52b6291/src/index.ts#L15)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`path` | string |
+
+**Returns:** *object*
+
+* **key**? : *undefined | string*
+
+* **value**? : *any[] | object*

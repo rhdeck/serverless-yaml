@@ -1,27 +1,27 @@
 {
-  "name": "template",
+  "name": "serverless-yaml",
   "private": true,
   "version": "1.0.0",
-  "description": "",
+  "description": "Inherit YAML changes for serverless",
   "main": "lib/index.js",
   "bin": "lib/bin.js",
   "scripts": {
     "pre-commit": "(git-branch-is --not main || (set -u && echo $ALLOWMAIN)) && yarn test",
     "test": "tsc --noEmit",
-    "build": "tsc && chmod +x lib/bin.js",
+    "build": "tsc && chmod +x lib/bin.js && yarn pack -f package.tgz",
     "docs": "typedoc --theme markdown --readme none --mode file --excludeNotExported --includeVersion --out docstemp && commanderdoc markdown lib/bin.js -o docstemp/__cli.md --cli-name \"npx `jq -r .name package.json`\" && rm README.md ; mv docstemp/README.md docstemp/_library.md && cp TOP.md docstemp/README.md ; concat-md docstemp > README.md && rm -rf docstemp",
     "prepublishOnly": "yarn build && yarn docs && git commit README.md -m \"docs: updating docs\" && git push"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rhdeck/base.git"
+    "url": "git+https://github.com/rhdeck/serverless-yaml.git"
   },
   "author": "Ray Deck",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rhdeck/base/issues"
+    "url": "https://github.com/rhdeck/serverless-yaml/issues"
   },
-  "homepage": "https://github.com/rhdeck/base#readme",
+  "homepage": "https://github.com/rhdeck/serverless-yaml#readme",
   "devDependencies": {
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
@@ -39,7 +39,16 @@
     "lib"
   ],
   "dependencies": {
+    "@raydeck/livelink": "^1.5.2",
+    "@raydeck/serverless-base": "^1.0.4",
     "commander": "^6.0.0",
-    "install-peers-cli": "^2.2.0"
+    "install-peers-cli": "^2.2.0",
+    "yaml": "^1.10.0"
+  },
+  "liveLink": {
+    "ignoreMasks": [
+      "lib/*",
+      "package.tgz"
+    ]
   }
 }
