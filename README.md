@@ -46,7 +46,7 @@ Update serverless yml based on partials in depedencies
 
 ▸ **apply**(`source`: object, `key`: string, `objOrArray`: object | any[]): *undefined | object*
 
-*Defined in [index.ts:39](https://github.com/rhdeck/serverless-yaml/blob/52b6291/src/index.ts#L39)*
+*Defined in [index.ts:30](https://github.com/rhdeck/serverless-yaml/blob/a4bfda0/src/index.ts#L30)*
 
 **Parameters:**
 
@@ -64,7 +64,7 @@ ___
 
 ▸ **getAllDependencies**(`path`: string): *[string, string][]*
 
-*Defined in [index.ts:5](https://github.com/rhdeck/serverless-yaml/blob/52b6291/src/index.ts#L5)*
+*Defined in [bin.ts:9](https://github.com/rhdeck/serverless-yaml/blob/a4bfda0/src/bin.ts#L9)*
 
 **Parameters:**
 
@@ -80,7 +80,7 @@ ___
 
 ▸ **inspectDependency**(`path`: string): *object*
 
-*Defined in [index.ts:15](https://github.com/rhdeck/serverless-yaml/blob/52b6291/src/index.ts#L15)*
+*Defined in [index.ts:5](https://github.com/rhdeck/serverless-yaml/blob/a4bfda0/src/index.ts#L5)*
 
 **Parameters:**
 
