@@ -32,17 +32,14 @@ commander.option(
 );
 commander.action(() => {
   const yamlpath = resolve(commander.workingPath, commander.yamlFile);
-  console.log("Starting with yamlpath", yamlpath);
   const obj = yaml.parse(
     readFileSync(yamlpath, {
       encoding: "utf-8",
     })
   );
   //Look at package.json dependencies
-  console.log("i will get all dependencies now", commander.workingPath);
   const dependencies = getAllDependencies(commander.workingPath);
   dependencies.forEach(([key, path]) => {
-    console.log("looking at dependency", key);
     const dependencyInfo = inspectDependency(
       resolve(commander.workingPath, "node_modules", key)
     );
@@ -56,7 +53,6 @@ commander.action(() => {
   if (serverlessDependencies) {
     Object.entries(<{ [key: string]: string }>serverlessDependencies).forEach(
       ([key, path]) => {
-        console.log("looking at serverless dependency", path);
         const dependencyInfo = inspectDependency(
           resolve(commander.workingPath, path)
         );
@@ -66,11 +62,11 @@ commander.action(() => {
       }
     );
   }
-  console.log("Starting with this app", commander.workingPath);
-  const dependencyInfo = inspectDependency(commander.workingPath);
-  Object.entries(dependencyInfo).forEach(([key, value]) => {
-    if (value && typeof value !== "string") apply(obj, key, value);
-  });
+  // console.log("Starting with this app", commander.workingPath);
+  // const dependencyInfo = inspectDependency(commander.workingPath);
+  // Object.entries(dependencyInfo).forEach(([key, value]) => {
+  //   if (value && typeof value !== "string") apply(obj, key, value);
+  // });
   const outPath = commander.output
     ? resolve(commander.workingPath, commander.output)
     : resolve(commander.workingPath, commander.yamlFile);
