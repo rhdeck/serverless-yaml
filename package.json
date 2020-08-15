@@ -1,6 +1,5 @@
 {
-  "name": "serverless-yaml",
-  "private": true,
+  "name": "@raydeck/serverless-yaml",
   "version": "1.0.0",
   "description": "Inherit YAML changes for serverless",
   "main": "lib/index.js",
