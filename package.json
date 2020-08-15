@@ -1,6 +1,6 @@
 {
   "name": "@raydeck/serverless-yaml",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Inherit YAML changes for serverless",
   "main": "lib/index.js",
   "bin": "lib/bin.js",
