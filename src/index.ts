@@ -1,6 +1,5 @@
 import { readFileSync, existsSync, readdirSync, lstatSync } from "fs";
 import { join, basename, extname } from "path";
-import { isArray } from "util";
 import yaml from "yaml";
 export function inspectDependency(path: string) {
   //Check for serverless path
@@ -39,17 +38,17 @@ export function apply(
   let endpoint = source;
   paths.forEach((path) => {
     if (!endpoint[path]) {
-      if (isArray(objOrArray)) endpoint[path] = [];
+      if (Array.isArray(objOrArray)) endpoint[path] = [];
       else endpoint[path] = {};
     }
     endpoint = endpoint[path];
   });
   //apply our solution
-  if (isArray(endpoint)) {
-    if (isArray(objOrArray)) {
+  if (Array.isArray(endpoint)) {
+    if (Array.isArray(objOrArray)) {
       endpoint.push(...objOrArray);
     }
-  } else if (!isArray(objOrArray)) {
+  } else if (!Array.isArray(objOrArray)) {
     //overlay my keys
     Object.entries(objOrArray).forEach(([key, val]) => {
       endpoint[key] = val;
