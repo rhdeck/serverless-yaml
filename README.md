@@ -30,7 +30,7 @@ Update serverless yml based on partials in depedencies
 <a name="_librarymd"></a>
 
 
-# @raydeck/serverless-yaml - v1.0.1
+# @raydeck/serverless-yaml - v1.1.0
 
 ## Index
 
@@ -46,7 +46,7 @@ Update serverless yml based on partials in depedencies
 
 ▸ **apply**(`source`: object, `key`: string, `objOrArray`: object | any[]): *undefined | object*
 
-*Defined in [index.ts:30](https://github.com/rhdeck/serverless-yaml/blob/c7734a5/src/index.ts#L30)*
+*Defined in [index.ts:29](https://github.com/rhdeck/serverless-yaml/blob/e4ed41c/src/index.ts#L29)*
 
 **Parameters:**
 
@@ -64,7 +64,7 @@ ___
 
 ▸ **getAllDependencies**(`path`: string): *[string, string][]*
 
-*Defined in [bin.ts:9](https://github.com/rhdeck/serverless-yaml/blob/c7734a5/src/bin.ts#L9)*
+*Defined in [bin.ts:9](https://github.com/rhdeck/serverless-yaml/blob/e4ed41c/src/bin.ts#L9)*
 
 **Parameters:**
 
@@ -80,7 +80,7 @@ ___
 
 ▸ **inspectDependency**(`path`: string): *object*
 
-*Defined in [index.ts:5](https://github.com/rhdeck/serverless-yaml/blob/c7734a5/src/index.ts#L5)*
+*Defined in [index.ts:4](https://github.com/rhdeck/serverless-yaml/blob/e4ed41c/src/index.ts#L4)*
 
 **Parameters:**
 
