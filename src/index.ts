@@ -1,15 +1,39 @@
 import { readFileSync, existsSync, readdirSync, lstatSync } from "fs";
 import { join, basename, extname } from "path";
 import yaml from "yaml";
-export function inspectDependency(path: string) {
+export function inspectDependency(path: string, keys: string[] = []) {
   //Check for serverless path
   const serverlessPath = join(path, "serverless");
   if (existsSync(serverlessPath)) {
     const files = readdirSync(serverlessPath);
     return (<[{ key?: string; value?: any[] | { [key: string]: any } }]>(
-      files.map((file) => {
+      files.flatMap((file) => {
         const filePath = join(serverlessPath, file);
-        if (lstatSync(filePath).isDirectory()) return {};
+        if (lstatSync(filePath).isDirectory()) {
+          if (["common", ...keys].includes(file)) {
+            return readdirSync(filePath).map((file2) => {
+              const filePath = join(serverlessPath, file, file2);
+              if (lstatSync(filePath).isDirectory()) return {};
+              const ext = extname(filePath);
+              const text = readFileSync(filePath, { encoding: "utf-8" });
+              switch (ext) {
+                case ".yml":
+                case ".yaml":
+                  return {
+                    key: basename(filePath, ext),
+                    value: yaml.parse(text),
+                  };
+                case ".json":
+                  return {
+                    key: basename(filePath, ext),
+                    value: JSON.parse(text),
+                  };
+                default:
+                  return {};
+              }
+            });
+          } else return {};
+        }
         const ext = extname(file);
         const text = readFileSync(filePath, { encoding: "utf-8" });
         switch (ext) {

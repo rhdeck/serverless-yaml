@@ -4,8 +4,17 @@ import yaml from "yaml";
 import { strOptions } from "yaml/types";
 import { inspectDependency, apply } from "./";
 import { readFileSync, writeFileSync } from "fs";
-import { resolve, join } from "path";
+import { resolve, join, basename } from "path";
 import { getServerlessConfig } from "@raydeck/serverless-base";
+export function getKeys(path: string = process.cwd()) {
+  const { name } = <{ name: string }>(
+    JSON.parse(readFileSync(join(path, "package.json"), { encoding: "utf-8" }))
+  );
+  const { keys } = <{ keys: string[] }>getServerlessConfig(path);
+  if (Array.isArray(keys)) {
+    return [name, ...keys];
+  } else return [name];
+}
 export function getAllDependencies(path: string = process.cwd()) {
   const { dependencies, devDependencies } = JSON.parse(
     readFileSync(join(path, "package.json"), { encoding: "utf-8" })
@@ -41,7 +50,8 @@ commander.action(() => {
   const dependencies = getAllDependencies(commander.workingPath);
   dependencies.forEach(([key, path]) => {
     const dependencyInfo = inspectDependency(
-      resolve(commander.workingPath, "node_modules", key)
+      resolve(commander.workingPath, "node_modules", key),
+      getKeys(commander.workingPath)
     );
     Object.entries(dependencyInfo).forEach(([key, value]) => {
       if (value && typeof value !== "string") apply(obj, key, value);
@@ -53,8 +63,13 @@ commander.action(() => {
   if (serverlessDependencies) {
     Object.entries(<{ [key: string]: string }>serverlessDependencies).forEach(
       ([key, path]) => {
-        const dependencyInfo = inspectDependency(
+        console.log(
+          "I will start inspectedependency",
           resolve(commander.workingPath, path)
+        );
+        const dependencyInfo = inspectDependency(
+          resolve(commander.workingPath, path),
+          getKeys(commander.workingPath)
         );
         Object.entries(dependencyInfo).forEach(([key, value]) => {
           if (value && typeof value !== "string") apply(obj, key, value);

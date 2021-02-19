@@ -29,67 +29,53 @@ Update serverless yml based on partials in depedencies
 
 <a name="_librarymd"></a>
 
+@raydeck/serverless-yaml - v1.2.0
 
 # @raydeck/serverless-yaml - v1.2.0
 
-## Index
+## Table of contents
 
 ### Functions
 
-* [apply](#apply)
-* [getAllDependencies](#getalldependencies)
-* [inspectDependency](#inspectdependency)
+- [apply](#apply)
+- [inspectDependency](#inspectdependency)
 
 ## Functions
 
-###  apply
+### apply
 
-▸ **apply**(`source`: object, `key`: string, `objOrArray`: object | any[]): *undefined | object*
+▸ **apply**(`source`: { [key: string]: *any*;  }, `key`: *string*, `objOrArray`: { [key: string]: *any*;  } \| *any*[]): *undefined* \| { [key: string]: *any*;  }
 
-*Defined in [index.ts:29](https://github.com/rhdeck/serverless-yaml/blob/c78ce01/src/index.ts#L29)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
-`source` | object |
-`key` | string |
-`objOrArray` | object &#124; any[] |
+`source` | { [key: string]: *any*;  } |
+`key` | *string* |
+`objOrArray` | { [key: string]: *any*;  } \| *any*[] |
 
-**Returns:** *undefined | object*
+**Returns:** *undefined* \| { [key: string]: *any*;  }
+
+Defined in: [index.ts:47](https://github.com/rhdeck/serverless-yaml/blob/6439144/src/index.ts#L47)
 
 ___
 
-###  getAllDependencies
+### inspectDependency
 
-▸ **getAllDependencies**(`path`: string): *[string, string][]*
+▸ **inspectDependency**(`path`: *string*, `keys?`: *string*[]): *object*
 
-*Defined in [bin.ts:9](https://github.com/rhdeck/serverless-yaml/blob/c78ce01/src/bin.ts#L9)*
+#### Parameters:
 
-**Parameters:**
-
-Name | Type | Default |
+Name | Type | Default value |
 ------ | ------ | ------ |
-`path` | string | process.cwd() |
-
-**Returns:** *[string, string][]*
-
-___
-
-###  inspectDependency
-
-▸ **inspectDependency**(`path`: string): *object*
-
-*Defined in [index.ts:4](https://github.com/rhdeck/serverless-yaml/blob/c78ce01/src/index.ts#L4)*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`path` | string |
+`path` | *string* | - |
+`keys` | *string*[] | ... |
 
 **Returns:** *object*
 
-* **key**? : *undefined | string*
+Name | Type |
+------ | ------ |
+`key?` | *undefined* \| *string* |
+`value?` | *undefined* \| *any*[] \| { [key: string]: *any*;  } |
 
-* **value**? : *any[] | object*
+Defined in: [index.ts:4](https://github.com/rhdeck/serverless-yaml/blob/6439144/src/index.ts#L4)
