@@ -14,20 +14,24 @@ export function inspectDependency(path: string, keys: string[] = []) {
             return readdirSync(filePath).map((file2) => {
               const filePath = join(serverlessPath, file, file2);
               if (lstatSync(filePath).isDirectory()) return {};
+              if (["base.yml", "serverless.yml"].includes(basename(filePath)))
+                return {};
+
               const ext = extname(filePath);
               const text = readFileSync(filePath, { encoding: "utf-8" });
               switch (ext) {
                 case ".yml":
                 case ".yaml":
+                  // console.log("Getting data from ", filePath);
                   return {
                     key: basename(filePath, ext),
                     value: yaml.parse(text),
                   };
-                case ".json":
-                  return {
-                    key: basename(filePath, ext),
-                    value: JSON.parse(text),
-                  };
+                // case ".json":
+                //   return {
+                //     key: basename(filePath, ext),
+                //     value: JSON.parse(text),
+                //   };
                 default:
                   return {};
               }
@@ -36,12 +40,16 @@ export function inspectDependency(path: string, keys: string[] = []) {
         }
         const ext = extname(file);
         const text = readFileSync(filePath, { encoding: "utf-8" });
+        if (["base.yml", "serverless.yml"].includes(basename(filePath)))
+          return {};
         switch (ext) {
           case ".yml":
           case ".yaml":
+            // console.log("Getting data from ", filePath);
+
             return { key: basename(file, ext), value: yaml.parse(text) };
-          case ".json":
-            return { key: basename(file, ext), value: JSON.parse(text) };
+          // case ".json":
+          //   return { key: basename(file, ext), value: JSON.parse(text) };
           default:
             return {};
         }

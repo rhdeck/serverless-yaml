@@ -63,10 +63,11 @@ commander.action(() => {
   if (serverlessDependencies) {
     Object.entries(<{ [key: string]: string }>serverlessDependencies).forEach(
       ([key, path]) => {
-        console.log(
-          "I will start inspectedependency",
-          resolve(commander.workingPath, path)
-        );
+        // if (key === "base") return;
+        // console.log(
+        //   "I will start inspectedependency",
+        //   resolve(commander.workingPath, path)
+        // );
         const dependencyInfo = inspectDependency(
           resolve(commander.workingPath, path),
           getKeys(commander.workingPath)
