@@ -6,6 +6,7 @@ import { inspectDependency, apply } from "./";
 import { readFileSync, writeFileSync } from "fs";
 import { resolve, join, basename } from "path";
 import { getServerlessConfig } from "@raydeck/serverless-base";
+import { isArray } from "util";
 export function getKeys(path: string = process.cwd()) {
   const { name } = <{ name: string }>(
     JSON.parse(readFileSync(join(path, "package.json"), { encoding: "utf-8" }))
@@ -88,7 +89,11 @@ commander.action(() => {
     ? resolve(commander.workingPath, commander.output)
     : resolve(commander.workingPath, commander.yamlFile);
   //Special case - resources that get half-created
-  if (obj.resources.Resources && !obj.resources.Resources.length)
+  if (
+    obj.resources.Resources &&
+    Array.isArray(obj.resoruces.Resources) &&
+    !obj.resources.Resources.length
+  )
     delete obj.resources.Resources;
   /* @ts-ignore */
   strOptions.defaultType = "QUOTE_DOUBLE";
