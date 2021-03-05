@@ -53,6 +53,7 @@ commander.action(() => {
       resolve(commander.workingPath, "node_modules", key),
       getKeys(commander.workingPath)
     );
+    // console.log("Got dependencyinfo for ", key, path, dependencyInfo);
     Object.entries(dependencyInfo).forEach(([key, value]) => {
       if (value && typeof value !== "string") apply(obj, key, value);
     });
@@ -86,6 +87,9 @@ commander.action(() => {
   const outPath = commander.output
     ? resolve(commander.workingPath, commander.output)
     : resolve(commander.workingPath, commander.yamlFile);
+  //Special case - resources that get half-created
+  if (obj.resources.Resources && !obj.resources.Resources.length)
+    delete obj.resources.Resources;
   /* @ts-ignore */
   strOptions.defaultType = "QUOTE_DOUBLE";
   writeFileSync(outPath, yaml.stringify(obj));
