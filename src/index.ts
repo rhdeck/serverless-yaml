@@ -42,6 +42,7 @@ export function inspectDependency(path: string, keys: string[] = []) {
         const text = readFileSync(filePath, { encoding: "utf-8" });
         if (["base.yml", "serverless.yml"].includes(basename(filePath)))
           return {};
+        if (basename(filePath).startsWith(".")) return {};
         switch (ext) {
           case ".yml":
           case ".yaml":
