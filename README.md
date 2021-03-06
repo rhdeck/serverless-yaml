@@ -29,9 +29,9 @@ Update serverless yml based on partials in depedencies
 
 <a name="_librarymd"></a>
 
-@raydeck/serverless-yaml - v1.3.1
+@raydeck/serverless-yaml - v1.4.0
 
-# @raydeck/serverless-yaml - v1.3.1
+# @raydeck/serverless-yaml - v1.4.0
 
 ## Table of contents
 
@@ -56,7 +56,7 @@ Name | Type |
 
 **Returns:** *undefined* \| { [key: string]: *any*;  }
 
-Defined in: [index.ts:61](https://github.com/rhdeck/serverless-yaml/blob/8e347f7/src/index.ts#L61)
+Defined in: [index.ts:62](https://github.com/rhdeck/serverless-yaml/blob/ee4d71b/src/index.ts#L62)
 
 ___
 
@@ -78,4 +78,4 @@ Name | Type |
 `key?` | *undefined* \| *string* |
 `value?` | *undefined* \| *any*[] \| { [key: string]: *any*;  } |
 
-Defined in: [index.ts:4](https://github.com/rhdeck/serverless-yaml/blob/8e347f7/src/index.ts#L4)
+Defined in: [index.ts:4](https://github.com/rhdeck/serverless-yaml/blob/ee4d71b/src/index.ts#L4)
