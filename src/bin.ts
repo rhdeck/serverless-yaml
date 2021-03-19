@@ -91,7 +91,7 @@ commander.action(() => {
   //Special case - resources that get half-created
   if (
     obj.resources.Resources &&
-    Array.isArray(obj.resoruces.Resources) &&
+    Array.isArray(obj.resources.Resources) &&
     !obj.resources.Resources.length
   )
     delete obj.resources.Resources;
